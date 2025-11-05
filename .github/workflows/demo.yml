@@ -1,9 +1,9 @@
-name: java web application demo
-on:
+name: Events Demo 1
+on: 
   pull_request:
     types:
-      - opened
-  #    - closed
+    - opened
+#    - edited
   workflow_dispatch:
 jobs:
   build:
