@@ -24,6 +24,6 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: my-artifact
+          name: java-web-app-1.0
           path: artifact
       
