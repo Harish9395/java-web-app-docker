@@ -21,4 +21,9 @@ jobs:
           distribution: 'temurin'
       - name: build maven 
         run: mvn -B clean install -f pom.xml
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: artifact
       
