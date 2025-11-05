@@ -1,14 +1,21 @@
-name: Events Demo 1
+name: Java web application demo
 on: 
   pull_request:
     types:
     - opened
 #    - edited
   workflow_dispatch:
+  
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
         uses: actions/checkout@v4
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
       
