@@ -44,14 +44,44 @@ jobs:
         run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
     # Build Docker image with a specific tag
       - name: Build Docker Image
-        run: docker build -t harish2195/java-web-application .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/java-web-application .
     # Push the built image to DockerHub
       - name: Push to DockerHub
-        run: docker push harish2195/java-web-application:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/java-web-application:latest
         
       # - name: Upload Artifact
       #   uses: actions/upload-artifact@v4
       #   with:
       #     name: java-web-app-1.0
       #     path: target/*.war
+
+    # Deploy job
+  Deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    # Steps to be executed in the Deploy job
+    steps:
+      # Configure Aws Credentials
+      - name: Configure Aws credentials
+        uses: aws-actions/configure-aws-credentials@v5.1.0
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: SSH into EC2 and deploy container
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+        
+      # Pull the latest Docker image from DockerHub
+      - name: Pull the Docker Image
+        run: docker pull ${{ secrets.DOCKER_USERNAME }}/java-web-application:latest 
+      - name: Delete old container
+        run:  docker rm -f maven-web-application
+             # docker stop maven-web-application
+      # Run a new container from the pulled image
+      - name: Run the Container
+        run: docker run -d -p 8080:8080 --name java-web-application ${{ secrets.DOCKER_USERNAME }}/java-web-application:latest
       
