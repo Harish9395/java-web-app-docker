@@ -14,7 +14,7 @@ public class HelloWorldService {
 
 		logger.debug("getDesc() is executed!");
 
-		return "Git, GitHub, Maven, CICD, Jenkins, Docker, Kubernetes, Terraform, ArgoCD and Amazon Web Services";
+		return "Sample java Application";
 
 	}
 
@@ -23,7 +23,7 @@ public class HelloWorldService {
 		logger.debug("getTitle() is executed! $name : {}", name);
 
 		if(StringUtils.isEmpty(name)){
-			return "Hello from Mithun Technologies";
+			return "Hello Sample java Application";
 		}else{
 			return "Hello " + name;
 		}
