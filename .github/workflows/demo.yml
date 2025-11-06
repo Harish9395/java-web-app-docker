@@ -61,17 +61,19 @@ jobs:
     runs-on: [aws-ec2]
     # Steps to be executed in the Deploy job
     steps:
-      # Configure Aws Credentials
-      - name: Configure Aws credentials
-        uses: aws-actions/configure-aws-credentials@v5.1.0
+      # # Configure Aws Credentials
+      # - name: Configure Aws credentials
+      #   uses: aws-actions/configure-aws-credentials@v5.1.0
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: ${{ secrets.AWS_REGION }}
+      - name: SSH into EC2 and deploy
+        uses: appleboy/ssh-action@v1.1.0
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      - name: SSH into EC2 and deploy container
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
       - name: Deploy to EC2
         run: |
              ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
