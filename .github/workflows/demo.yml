@@ -1,4 +1,4 @@
-name: Java web application demo
+name: Java web application demo1
 on: 
   pull_request:
     types:
