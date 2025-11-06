@@ -2,7 +2,7 @@ name: Java web application demo1
 on: 
   pull_request:
     types:
-    - opened
+   # - opened
     - labeled
     - unlabeled
 #    - edited
