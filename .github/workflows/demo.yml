@@ -77,6 +77,11 @@ jobs:
              ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
         
       # Pull the latest Docker image from DockerHub
+      - name: Login to DockerHub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
       - name: Pull the Docker Image
         run: docker pull ${{ secrets.DOCKER_USERNAME }}/java-web-application:latest 
       - name: Delete old container
