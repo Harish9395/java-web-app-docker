@@ -85,8 +85,8 @@ jobs:
       - name: Pull the Docker Image
         run: docker pull ${{ secrets.DOCKER_USERNAME }}/java-web-application:latest 
       - name: Delete old container
-        run:  docker rm -f maven-web-application
-             # docker stop maven-web-application
+        run:  docker rm -f java-web-application
+             # docker stop java-web-application
       # Run a new container from the pulled image
       - name: Run the Container
         run: docker run -d -p 8080:8080 --name java-web-application ${{ secrets.DOCKER_USERNAME }}/java-web-application:latest
