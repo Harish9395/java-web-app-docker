@@ -69,7 +69,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: SSH into EC2 and deploy container
-        uses: appleboy/ssh-action@v1.1.0
+        uses: actions/checkout@v4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
