@@ -71,9 +71,10 @@ jobs:
       - name: SSH into EC2 and deploy container
         uses: webfactory/ssh-agent@v0.9.0
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
+      - name: Deploy to EC2
+        run: |
+             ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
         
       # Pull the latest Docker image from DockerHub
       - name: Pull the Docker Image
