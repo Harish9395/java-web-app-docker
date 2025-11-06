@@ -54,4 +54,20 @@ jobs:
       #   with:
       #     name: java-web-app-1.0
       #     path: target/*.war
+
+    # Deploy job
+  Deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    # Steps to be executed in the Deploy job
+    steps:
+      # Pull the latest Docker image from DockerHub
+      - name: Pull the Docker Image
+        run: docker pull harish2195/java-web-application:latest 
+      - name: Delete old container
+        run:  docker rm -f maven-web-application
+             # docker stop maven-web-application
+      # Run a new container from the pulled image
+      - name: Run the Container
+        run: docker run -d -p 8080:8080 --name java-web-application harish2195/java-web-application:latest
       
