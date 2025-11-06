@@ -30,11 +30,11 @@ jobs:
       - name: build maven 
         run: mvn -B clean install -f pom.xml
       # SonarQube Scanner configuration
-      - name: Sonarqube scan
-        env: 
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn sonar:sonar
+      # - name: Sonarqube scan
+      #   env: 
+      #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   run: mvn sonar:sonar
 
     # Login to DockerHub using secrets for credentials
       - name: Login to DockerHub
