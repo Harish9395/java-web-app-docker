@@ -8,7 +8,7 @@ on:
 #    - edited
 
   workflow_dispatch:
-# push  
+ push  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
     # Deploy job
   Deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: [aws-ec2]
     # Steps to be executed in the Deploy job
     steps:
       # Configure Aws Credentials
