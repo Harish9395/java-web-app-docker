@@ -25,7 +25,7 @@ jobs:
     #   )) 
     env:
       AWS_REGION: us-east-2
-      ECR_REPOSITORY: my-app
+      ECR_REPOSITORY: java-web-application
     steps:
       - name: Get code
         uses: actions/checkout@v4
