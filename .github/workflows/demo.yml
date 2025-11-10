@@ -12,7 +12,7 @@ on:
 env:
   AWS_REGION: us-east-2                 
   ECR_REPOSITORY: java-web-application          
-  IMAGE_TAG: latest   
+#  IMAGE_TAG: latest   
   
 permissions:
   id-token: write
@@ -83,7 +83,8 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     # Deploy job
   # Deploy:
