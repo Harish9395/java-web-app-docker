@@ -95,6 +95,12 @@ jobs:
     #Deploy to ECS 
       - name: Get code
         uses: actions/checkout@v4
+      - name: Debug list ecs folder
+        run: |
+          echo "Root contents:"
+          ls -R .
+          echo "ecs folder contents:"
+          ls ecs
       - name: Render ECS task definition with new image
         id: render-task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
