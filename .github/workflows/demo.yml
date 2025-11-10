@@ -13,6 +13,10 @@ env:
   AWS_REGION: us-east-2                 
   ECR_REPOSITORY: java-web-application          
 #  IMAGE_TAG: latest   
+  ECS_CLUSTER: ecs-demo                
+  ECS_SERVICE: my‑ecs‑service                 
+  ECS_TASK_DEFINITION_FILE: ecs‑task‑definition.json  # Path in repo to your task def file
+  CONTAINER_NAME: java‑web‑application        # Name of the container in the task definition
   
 permissions:
   id-token: write
@@ -84,7 +88,16 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG >> $GITHUB_OUTPUT
+
+    #Deploy to ECS 
+      - name: Render ECS task definition with new image
+        id: render-task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION_FILE }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
 
     # Deploy job
   # Deploy:
