@@ -14,7 +14,7 @@ public class HelloWorldService {
 
 		logger.debug("getDesc() is executed!");
 
-		return "Sample java Application";
+		return "Sample java App";
 
 	}
 
