@@ -2,7 +2,7 @@
   "requiresCompatibilities": [
     "FARGATE"
   ],
-  "family": "java‑web‑application",
+  "family": "java-web-application",
   "networkMode": "awsvpc",
   "cpu": "1024",
   "memory": "3072",
