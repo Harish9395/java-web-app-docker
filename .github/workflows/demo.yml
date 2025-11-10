@@ -67,8 +67,6 @@ jobs:
       #   with:
       #     name: java-web-app-1.0
       #     path: target/*.war
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       - name: Configure AWS credentials via OIDC
         uses: aws-actions/configure-aws-credentials@v4
