@@ -8,14 +8,14 @@ on:
 #    - edited
 
   workflow_dispatch:
-  push:
+ # push:
 env:
   AWS_REGION: us-east-2                 
   ECR_REPOSITORY: java-web-application          
 #  IMAGE_TAG: latest   
   ECS_CLUSTER: ecs-demo                
   ECS_SERVICE: my‑ecs‑service                 
-  ECS_TASK_DEFINITION_FILE: ecs‑task‑definition.json  # Path in repo to your task def file
+  ECS_TASK_DEFINITION_FILE: ecs/ecs‑task‑definition.json  # Path in repo to your task def file
   CONTAINER_NAME: java‑web‑application        # Name of the container in the task definition
   
 permissions:
