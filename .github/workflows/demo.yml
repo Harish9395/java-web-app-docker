@@ -78,9 +78,10 @@ jobs:
         run: |
           ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
           IMAGE_TAG=${GITHUB_SHA::7}
+          docker build -t $ECR_URI:$IMAGE_TAG .
           ECR_URI=$ACCOUNT_ID.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}
 
-          docker build -t $ECR_URI:$IMAGE_TAG .
+         
           docker push $ECR_URI:$IMAGE_TAG
 
     # Deploy job
