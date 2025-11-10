@@ -9,10 +9,15 @@ on:
 
   workflow_dispatch:
   push:
+env:
+  AWS_REGION: us-east-2                 
+  ECR_REPOSITORY: java-web-application          
+  IMAGE_TAG: latest   
   
 permissions:
   id-token: write
   contents: read
+  
 
 jobs:
   build:
@@ -74,14 +79,15 @@ jobs:
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, and push Docker image
+      - name: Build, tag, and push image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-          IMAGE_TAG=${GITHUB_SHA::7}
-          docker build -t $ECR_URI:latest .
-          ECR_URI=$ACCOUNT_ID.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}
-
-          docker push $ECR_URI:latest
+          IMAGE_URI=${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
+          echo "Building Docker image: $IMAGE_URI"
+          docker build -t $IMAGE_URI .
+          docker push $IMAGE_URI
+          echo "Image pushed to ECR: $IMAGE_URI"
 
     # Deploy job
   # Deploy:
