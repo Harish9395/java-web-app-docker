@@ -73,22 +73,15 @@ jobs:
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
+
       - name: Build, tag, and push Docker image
         run: |
           ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-          ECR_URI=$ACCOUNT_ID.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}
           IMAGE_TAG=${GITHUB_SHA::7}
+          ECR_URI=$ACCOUNT_ID.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}
 
-          echo "Building Docker image..."
           docker build -t $ECR_URI:$IMAGE_TAG .
-
-          echo "Pushing image to ECR..."
           docker push $ECR_URI:$IMAGE_TAG
-
-          echo "ECR_IMAGE=$ECR_URI:$IMAGE_TAG" >> $GITHUB_ENV
-
-      - name: Output pushed image
-        run: echo "✅ Pushed image to $ECR_IMAGE"
 
     # Deploy job
   # Deploy:
