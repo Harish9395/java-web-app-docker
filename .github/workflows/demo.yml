@@ -16,7 +16,7 @@ env:
   ECS_CLUSTER: ecs-demo                
   ECS_SERVICE: my‑ecs‑service                 
   ECS_TASK_DEFINITION_FILE: java-app-task‑definition.json  # Path in repo to your task def file
-  CONTAINER_NAME: java‑web‑application        # Name of the container in the task definition
+  CONTAINER_NAME: java-web-application        # Name of the container in the task definition
   
 permissions:
   id-token: write
