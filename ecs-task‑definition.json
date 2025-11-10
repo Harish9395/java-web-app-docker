@@ -1,0 +1,25 @@
+{
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "family": "java‑web‑application",
+  "networkMode": "awsvpc",
+  "cpu": "1024",
+  "memory": "3072",
+  "executionRoleArn": "arn:aws:iam::482387069884:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "java‑web‑application",
+      "image": "482387069884.dkr.ecr.us‑east-2.amazonaws.com/java‑web‑application:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 8080,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  ],
+  "volumes": []
+}
