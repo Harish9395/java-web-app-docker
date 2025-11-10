@@ -83,6 +83,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build and Tag Docker Image
+        id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
@@ -99,6 +100,7 @@ jobs:
           task-definition: ${{ env.ECS_TASK_DEFINITION_FILE }}
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
+          
 
     # Deploy job
   # Deploy:
