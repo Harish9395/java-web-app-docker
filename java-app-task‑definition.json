@@ -9,7 +9,7 @@
   "executionRoleArn": "arn:aws:iam::482387069884:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
-      "name": "java‑web‑application",
+      "name": "java-web-application",
       "image": "482387069884.dkr.ecr.us‑east-2.amazonaws.com/java‑web‑application:latest",
       "essential": true,
       "portMappings": [
