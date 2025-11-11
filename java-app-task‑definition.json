@@ -10,7 +10,7 @@
   "containerDefinitions": [
     {
       "name": "java-web-application",
-      "image": "482387069884.dkr.ecr.us‑east-2.amazonaws.com/java‑web‑application:latest",
+      "image": "ghcr.io/harish9395/java-web-application:latest",
       "essential": true,
       "portMappings": [
         {
