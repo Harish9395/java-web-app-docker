@@ -21,6 +21,7 @@ env:
 permissions:
   id-token: write
   contents: read
+  packages: write
   
 
 jobs:
@@ -41,7 +42,8 @@ jobs:
 
     permissions:
       contents: read
-      packages: write
+      packages: write   
+      id-token: write
       
     steps:
       - name: Get code
