@@ -1,11 +1,9 @@
 {
-  "requiresCompatibilities": [
-    "FARGATE"
-  ],
   "family": "java-web-application",
+  "cpu": "{{CPU}}",
+  "memory": "{{MEMORY}}",
   "networkMode": "awsvpc",
-  "cpu": "1024",
-  "memory": "3072",
+  "requiresCompatibilities": ["FARGATE"],
   "executionRoleArn": "arn:aws:iam::482387069884:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
@@ -18,8 +16,30 @@
           "hostPort": 8080,
           "protocol": "tcp"
         }
+      ],
+      "environment": [
+        {
+          "name": "CONFIG_URL",
+          "value": "http://localhost:2772/applications/my-app/environments/dev/configurations/app-settings"
+        }
+      ]
+    },
+    {
+      "name": "appconfig-agent",
+      "image": "amazon/aws-appconfig-agent:latest",
+      "essential": true,
+      "environment": [
+        {
+          "name": "AWS_REGION",
+          "value": "us-east-2"
+        }
+      ],
+      "portMappings": [
+        {
+          "containerPort": 2772,
+          "hostPort": 2772
+        }
       ]
     }
-  ],
-  "volumes": []
+  ]
 }
