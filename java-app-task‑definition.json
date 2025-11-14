@@ -1,7 +1,7 @@
 {
   "family": "java-web-application",
-  "cpu": "{{CPU}}",
-  "memory": "{{MEMORY}}",
+  "cpu": "1024",
+  "memory": "3072",
   "networkMode": "awsvpc",
   "requiresCompatibilities": ["FARGATE"],
   "executionRoleArn": "arn:aws:iam::482387069884:role/ecsTaskExecutionRole",
