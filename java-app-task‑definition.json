@@ -26,13 +26,16 @@
     },
     {
       "name": "appconfig-agent",
-      "image": "amazon/aws-appconfig-agent:latest",
-      "essential": true,
+      "image": "public.ecr.aws/aws-appconfig/aws-appconfig-agent:latest",
+      "essential": false,
+      "memory": 128,
+      "cpu": 128,
       "environment": [
-        {
-          "name": "AWS_REGION",
-          "value": "us-east-2"
-        }
+        { "name": "APPCONFIG_APPLICATION", "value": "my-app" },
+        { "name": "APPCONFIG_ENVIRONMENT", "value": "dev" },
+        { "name": "APPCONFIG_CONFIGURATION", "value": "app-settings" },
+        { "name": "APPCONFIG_POLL_INTERVAL_SECONDS", "value": "5" },
+        { "name": "AWS_REGION", "value": "us-east-2" }
       ],
       "portMappings": [
         {
