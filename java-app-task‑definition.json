@@ -33,7 +33,7 @@
       "environment": [
         { "name": "APPCONFIG_APPLICATION", "value": "my-app" },
         { "name": "APPCONFIG_ENVIRONMENT", "value": "dev" },
-        { "name": "APPCONFIG_CONFIGURATION", "value": "app-settings" },
+        { "name": "APPCONFIG_CONFIGURATION", "value": "runtime-config" },
         { "name": "APPCONFIG_POLL_INTERVAL_SECONDS", "value": "5" },
         { "name": "AWS_REGION", "value": "us-east-2" }
       ],
