@@ -42,6 +42,19 @@
 		<div class="col-md-8">
 			<h2>Welcome to  India</h2>
 			<h3>Contact @ +91 998092</h3>
+            <div class="container">
+
+	<div class="row">
+		<div class="col-md-8">
+			<h2>Welcome to India</h2>
+			<h3>Contact @ +91 998092</h3>
+			<h2>Dynamic AppConfig Values</h2>
+			<p>Username: ${username}</p>
+			<p>Log Level: ${logLevel}</p>
+			<p>Feature Flag: ${featureFlag}</p>
+		</div>	
+	</div>
+
 		</div>	
 	</div>
 
