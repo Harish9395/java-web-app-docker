@@ -6,4 +6,4 @@ ENV CONFIG_URL=http://localhost:2772/applications/my-app/environments/dev/config
 COPY load-env.sh /usr/local/bin/load-env.sh
 RUN chmod +x /usr/local/bin/load-env.sh
 # Make load-env.sh the entrypoint
-ENTRYPOINT ["/usr/local/bin/load-env.sh"]
+CMD ["/bin/bash", "-c", "/usr/local/bin/load-env.sh & catalina.sh run"]
