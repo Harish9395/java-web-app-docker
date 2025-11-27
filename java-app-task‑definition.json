@@ -5,7 +5,6 @@
   "networkMode": "awsvpc",
   "requiresCompatibilities": ["FARGATE"],
   "executionRoleArn": "arn:aws:iam::482387069884:role/ecsTaskExecutionRole",
-  "taskRoleArn": "arn:aws:iam::482387069884:role/ecsTaskRole",
   "containerDefinitions": [
     {
       "name": "java-web-application",
