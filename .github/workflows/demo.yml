@@ -22,7 +22,7 @@ permissions:
   id-token: write
   contents: read
   packages: write
-  
+  security-events: write
 
 jobs:
   codeql:
@@ -45,6 +45,7 @@ jobs:
         uses: github/codeql-action/analyze@v3
         
   build:
+    needs: codeql
     runs-on: ubuntu-latest
     env:
       AWS_REGION: us-east-2
