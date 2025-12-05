@@ -1,0 +1,41 @@
+name: "CodeQL Scan"
+
+on:
+  push:
+    branches:
+      - feature-dev
+  pull_request:
+    branches:
+      - feature-dev
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write   # Required to upload CodeQL results
+
+jobs:
+  codeql:
+    name: CodeQL Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: java   # or csharp / python / javascript depending on your repo
+
+      - name: Build Project for CodeQL
+        run: mvn -B clean install -f pom.xml   # or your build command
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          output: results.sarif
+
+      - name: Upload CodeQL SARIF results
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results.sarif
