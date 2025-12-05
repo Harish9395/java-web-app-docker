@@ -1,42 +1,40 @@
-name: "CodeQL Scan"
+e: "CodeQL Analysis"
 
 on:
   push:
-    branches:
-      - master
-      - feature-dev
+    branches: [ "master", "Feature-dev" ]
   pull_request:
-    branches:
-      - feature-dev
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  security-events: write   # Required to upload CodeQL results
+    branches: [ "master" , "Feature-dev" ]
 
 jobs:
-  codeql:
-    name: CodeQL Scan
+  analyze:
+    name: Analyze
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'java', 'python' ]  # Modify these languages as needed
+        # Available options: 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby'
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: java   # or csharp / python / javascript depending on your repo
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
 
-      - name: Build Project for CodeQL
-        run: mvn -B clean install -f pom.xml   # or your build command
+    # Autobuild attempts to build any compiled languages
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
-        with:
-          output: results.sarif
-
-      # - name: Upload CodeQL SARIF results
-      #   uses: github/codeql-action/upload-sarif@v3
-      #   with:
-      #     sarif_file: results.sarif
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      with:
+        category: "/language:${{matrix.language}}"
