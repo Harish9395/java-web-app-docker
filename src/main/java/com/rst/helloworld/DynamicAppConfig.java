@@ -1,4 +1,4 @@
-package com.example.app;
+package com.rst.helloworld;
 
 import java.net.URI;
 import java.net.http.*;
@@ -15,6 +15,11 @@ public class DynamicAppConfig {
     public static void refreshConfig() {
         try {
             String url = System.getenv("CONFIG_URL");
+            if (url == null) {
+                System.err.println("CONFIG_URL not set");
+                return;
+            }
+
             HttpRequest req = HttpRequest.newBuilder()
                     .uri(URI.create(url))
                     .GET()
@@ -29,20 +34,20 @@ public class DynamicAppConfig {
             }
 
         } catch (Exception e) {
-            System.err.println("AppConfig error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     public static String get(String key) {
         if (configMap == null) return null;
         Object value = configMap.get(key);
-        return value != null ? value.toString() : null;
+        return value == null ? null : value.toString();
     }
 
     public static void startAutoRefresh(int seconds) {
         refreshConfig();
-        ScheduledExecutorService sch = Executors.newScheduledThreadPool(1);
-        sch.scheduleAtFixedRate(DynamicAppConfig::refreshConfig,
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(DynamicAppConfig::refreshConfig,
                 seconds, seconds, TimeUnit.SECONDS);
     }
 }
