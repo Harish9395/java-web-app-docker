@@ -13,15 +13,15 @@
       "portMappings": [
         {
           "containerPort": 8080,
-          "hostPort": 8080,
           "protocol": "tcp"
         }
       ],
       "environment": [
-        {
-          "name": "CONFIG_URL",
-          "value": "http://localhost:2772/applications/my-app/environments/dev/configurations/app-settings"
-        }
+        { "name": "APPCONFIG_APPLICATION", "value": "Test-app" },
+        { "name": "APPCONFIG_ENVIRONMENT", "value": "Dev" },
+        { "name": "APPCONFIG_CONFIGURATION", "value": "runtime-config" },
+        { "name": "APPCONFIG_HOST", "value": "localhost" },
+        { "name": "APPCONFIG_PORT", "value": "2772" }
       ]
     },
     {
@@ -31,16 +31,15 @@
       "memory": 128,
       "cpu": 128,
       "environment": [
-        { "name": "APPCONFIG_APPLICATION", "value": "my-app" },
-        { "name": "APPCONFIG_ENVIRONMENT", "value": "dev" },
+        { "name": "APPCONFIG_APPLICATION", "value": "Test-app" },
+        { "name": "APPCONFIG_ENVIRONMENT", "value": "Dev" },
         { "name": "APPCONFIG_CONFIGURATION", "value": "runtime-config" },
-        { "name": "APPCONFIG_POLL_INTERVAL_SECONDS", "value": "5" },
+        { "name": "APPCONFIG_POLL_INTERVAL_SECONDS", "value": "15" },
         { "name": "AWS_REGION", "value": "us-east-2" }
       ],
       "portMappings": [
         {
-          "containerPort": 2772,
-          "hostPort": 2772
+          "containerPort": 2772
         }
       ]
     }
