@@ -1,4 +1,6 @@
-import java.io.IOException;https://github.com/Harish9395/java-web-app-docker/tree/Feature-dev/src/main/java/com/rst/helloworld/config
+package com.rst.helloworld;
+
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -16,12 +18,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class DynamicAppConfig {
 
-    // Environment variables for sidecar
-    private static final String APPCONFIG_HOST = System.getenv("APPCONFIG_HOST");
-    private static final String APPCONFIG_PORT = System.getenv("APPCONFIG_PORT");
-    private static final String APPCONFIG_APPLICATION = System.getenv("APPCONFIG_APPLICATION");
-    private static final String APPCONFIG_ENVIRONMENT = System.getenv("APPCONFIG_ENVIRONMENT");
-    private static final String APPCONFIG_CONFIGURATION = System.getenv("APPCONFIG_CONFIGURATION");
+    // Sidecar configuration
+    private static final String APPCONFIG_HOST = System.getenv().getOrDefault("APPCONFIG_HOST", "localhost");
+    private static final String APPCONFIG_PORT = System.getenv().getOrDefault("APPCONFIG_PORT", "2772");
+    private static final String APPCONFIG_APPLICATION = System.getenv().getOrDefault("APPCONFIG_APPLICATION", "Test-app");
+    private static final String APPCONFIG_ENVIRONMENT = System.getenv().getOrDefault("APPCONFIG_ENVIRONMENT", "DEv");
+    private static final String APPCONFIG_CONFIGURATION = System.getenv().getOrDefault("APPCONFIG_CONFIGURATION", "runtime-config");
 
     private static final HttpClient httpClient = HttpClient.newHttpClient();
     private static final ObjectMapper objectMapper = new ObjectMapper();
