@@ -1,7 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                             http://maven.apache.org/maven-v4_0_0.xsd">
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mt</groupId>
@@ -10,21 +11,19 @@
     <packaging>war</packaging>
 
     <name>java-web-app</name>
-    <url>http://mithuntechnologies.com</url>
-
-    <description>Java Web App with dynamic AppConfig integration</description>
+    <description>Java Web App with dynamic AWS AppConfig Integration</description>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
         <spring.version>5.0.7.RELEASE</spring.version>
         <junit.version>4.12</junit.version>
-        <log4j.version>1.2.17</log4j.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
-        <!-- Spring dependencies -->
+
+        <!-- Spring Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -46,7 +45,7 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- Servlet and JSTL -->
+        <!-- Servlet / JSP -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -66,7 +65,7 @@
             <version>1.2.3</version>
         </dependency>
 
-        <!-- Jackson JSON for AppConfig parsing -->
+        <!-- JSON Parsing for AppConfig -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -83,17 +82,11 @@
             <version>2.15.2</version>
         </dependency>
 
-        <!-- Test dependencies -->
+        <!-- Testing -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>3.2.3.RELEASE</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -105,8 +98,11 @@
     </dependencies>
 
     <build>
+        <finalName>java-web-app</finalName>
+
         <plugins>
-            <!-- Compiler plugin using Java 11 -->
+
+            <!-- Java Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -117,7 +113,7 @@
                 </configuration>
             </plugin>
 
-            <!-- WAR plugin for deployment -->
+            <!-- WAR Builder -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -126,6 +122,8 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
+
 </project>
