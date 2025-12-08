@@ -17,12 +17,12 @@
         }
       ],
       "environment": [
-        { "name": "APPCONFIG_APPLICATION", "value": "Test-app" },
-        { "name": "APPCONFIG_ENVIRONMENT", "value": "Dev" },
-        { "name": "APPCONFIG_CONFIGURATION", "value": "runtime-config" },
-        { "name": "APPCONFIG_HOST", "value": "localhost" },
-        { "name": "APPCONFIG_PORT", "value": "2772" }
-      ]
+        {
+          "name": "CONFIG_URL",
+          "value": "http://localhost:2772/applications/Test-app/environments/DEv/configurations/runtime-config/latest"
+        }
+      ],
+      "essential": true
     },
     {
       "name": "appconfig-agent",
