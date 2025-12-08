@@ -1,57 +1,48 @@
-package com.rst.helloworld;
+package com.example.app;
 
-import java.io.IOException;
 import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.net.http.*;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
+import java.util.concurrent.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class DynamicAppConfig {
 
-    private static final HttpClient httpClient = HttpClient.newHttpClient();
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-
     private static volatile Map<String, Object> configMap;
-
-    private static String getConfigUrl() {
-        return System.getenv("CONFIG_URL");
-    }
+    private static final HttpClient client = HttpClient.newHttpClient();
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     public static void refreshConfig() {
         try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(getConfigUrl()))
+            String url = System.getenv("CONFIG_URL");
+            HttpRequest req = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
                     .GET()
                     .build();
 
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> res =
+                    client.send(req, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == 200) {
-                configMap = objectMapper.readValue(response.body(), Map.class);
-                System.out.println("AppConfig updated: " + configMap);
-            } else {
-                System.err.println("Failed to fetch AppConfig: HTTP " + response.statusCode());
+            if (res.statusCode() == 200) {
+                configMap = mapper.readValue(res.body(), Map.class);
+                System.out.println("[AppConfig] Updated: " + configMap);
             }
-        } catch (IOException | InterruptedException e) {
-            System.err.println("Error fetching AppConfig: " + e.getMessage());
+
+        } catch (Exception e) {
+            System.err.println("AppConfig error: " + e.getMessage());
         }
     }
 
     public static String get(String key) {
-        Object value = configMap != null ? configMap.get(key) : null;
+        if (configMap == null) return null;
+        Object value = configMap.get(key);
         return value != null ? value.toString() : null;
     }
 
-    public static void startAutoRefresh(int pollIntervalSeconds) {
+    public static void startAutoRefresh(int seconds) {
         refreshConfig();
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(DynamicAppConfig::refreshConfig,
-                pollIntervalSeconds, pollIntervalSeconds, TimeUnit.SECONDS);
+        ScheduledExecutorService sch = Executors.newScheduledThreadPool(1);
+        sch.scheduleAtFixedRate(DynamicAppConfig::refreshConfig,
+                seconds, seconds, TimeUnit.SECONDS);
     }
 }
