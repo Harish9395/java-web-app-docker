@@ -45,17 +45,26 @@
             <div class="container">
 		</div>	
 	</div>
-    <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         version="3.1">
+<%@ page import="com.example.app.DynamicAppConfig" %>
 
-    <listener>
-        <listener-class>com.example.app.AppConfigListener</listener-class>
-    </listener>
+<html>
+<body>
+<h2>AWS AppConfig Dynamic Values</h2>
 
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
-</web-app>
+<%
+    String value = DynamicAppConfig.get("MY_ENV_VAR");
+    if (value == null) value = "Waiting for AppConfig...";
+%>
+
+<p><b>MY_ENV_VAR:</b> <%= value %></p>
+
+<script>
+setTimeout(() => location.reload(), 5000);
+</script>
+
+</body>
+</html>
+
 
 	<hr>
 	<footer>
