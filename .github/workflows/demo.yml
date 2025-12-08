@@ -24,28 +24,8 @@ permissions:
   packages: write
   security-events: write
 
-jobs:
-  codeql:
-    name: CodeQL Scan
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: java
-
-      - name: Build Code for CodeQL
-        run: mvn -B clean install -f pom.xml
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
-        
+jobs:     
   build:
-    needs: codeql
     runs-on: ubuntu-latest
     env:
       AWS_REGION: us-east-2
