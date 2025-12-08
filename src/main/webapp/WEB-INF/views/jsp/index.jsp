@@ -43,23 +43,23 @@
 			<h2>Welcome </h2>
 			<h3>Simple java App</h3>
             <div class="container">
-
-	<div class="row">
-		<div class="col-md-8">
-			<h2>Dynamic AppConfig Values</h2>
-			<p>Username: ${username}</p>
-			<p>Log Level: ${logLevel}</p>
-			<p>Feature Flag: ${featureFlag}</p>
 		</div>	
 	</div>
+    <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         version="3.1">
 
-		</div>	
-	</div>
+    <listener>
+        <listener-class>com.example.app.AppConfigListener</listener-class>
+    </listener>
 
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
 
 	<hr>
 	<footer>
-		<p>&copy; Welcone</p>
+		<p>&copy; Welcome</p>
 	</footer>
 </div>
 
