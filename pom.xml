@@ -102,6 +102,12 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>7.33.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
