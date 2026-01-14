@@ -44,7 +44,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Test
-        run: mvn clean verify -Dtesting.dtd.http=true
+        run: mvn verify -Dtesting.dtd.http=true
         
       - name: Deploy report page to GitHub Page
         uses: actions/upload-artifact@v4
