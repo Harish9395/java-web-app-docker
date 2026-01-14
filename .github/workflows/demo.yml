@@ -34,23 +34,38 @@ jobs:
       IMAGE_NAME: harish9395/java-web-application
       IMAGE_TAG: ${{ github.sha }}
 
-    steps:
-      - name: Get code
+    steps: 
+      - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Install Taurus
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip3 install bzt
+
+      - name: Run Performance Test on BlazeMeter
+        env:
+          BLAZEMETER_API_KEY: ${{ secrets.BLAZEMETER_API_KEY }}
+          BLAZEMETER_API_SECRET: ${{ secrets.BLAZEMETER_API_SECRET }}
+        run: |
+          bzt performance.yaml
+      # - name: Get code
+      #   uses: actions/checkout@v4
         
-      - name: Set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Test
-        run: mvn verify -Dtesting.dtd.http=true
+      # - name: Set up JDK 11
+      #   uses: actions/setup-java@v3
+      #   with:
+      #     java-version: '17'
+      #     distribution: 'temurin'
+      # - name: Test
+      #   run: mvn verify -Dtesting.dtd.http=true
         
-      - name: Deploy report page to GitHub Page
-        uses: actions/upload-artifact@v4
-        with:
-          publish_dir: ./target/cucumber-report.html/cucumber-html-reports
-          if-no-files-found: warn
+      # - name: Deploy report page to GitHub Page
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     publish_dir: ./target/cucumber-report.html/cucumber-html-reports
+      #     if-no-files-found: warn
         
         
       - name: Get code
