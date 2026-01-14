@@ -43,6 +43,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: test 
+        run: mvn clean test
       - name: build maven 
         run: mvn -B clean install -f pom.xml
       # SonarQube Scanner configuration
