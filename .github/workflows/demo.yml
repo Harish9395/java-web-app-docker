@@ -47,7 +47,7 @@ jobs:
         run: mvn clean verify -Dtesting.dtd.http=true
         
       - name: Deploy report page to GitHub Page
-        uses: peaceiris/action-gh-pages@v3
+        uses: actions/upload-artifact@v4
         with:
           publish_dir: ./target/cucumber-report.html/cucumber-html-reports
         
