@@ -8,7 +8,7 @@ execution:
 scenarios:
   simple_ui:
     requests:
-      - url: https://your-app-url/   # <-- replace with your .NET page URL
+      - url: https://java-web-app//   # <-- replace with your .NET page URL
         method: GET
 
 reporting:
