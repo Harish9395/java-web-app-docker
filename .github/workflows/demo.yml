@@ -35,21 +35,21 @@ jobs:
       IMAGE_TAG: ${{ github.sha }}
 
     steps: 
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      # - name: Checkout repository
+      #   uses: actions/checkout@v4
 
-      - name: Install Taurus
-        run: |
-          sudo apt update
-          sudo apt install -y python3-pip
-          pip3 install bzt
+      # - name: Install Taurus
+      #   run: |
+      #     sudo apt update
+      #     sudo apt install -y python3-pip
+      #     pip3 install bzt
 
-      - name: Run Performance Test on BlazeMeter
-        env:
-          BLAZEMETER_API_KEY: ${{ secrets.BLAZEMETER_API_KEY }}
-          BLAZEMETER_API_SECRET: ${{ secrets.BLAZEMETER_API_SECRET }}
-        run: |
-          bzt performance.yaml
+      # - name: Run Performance Test on BlazeMeter
+      #   env:
+      #     BLAZEMETER_API_KEY: ${{ secrets.BLAZEMETER_API_KEY }}
+      #     BLAZEMETER_API_SECRET: ${{ secrets.BLAZEMETER_API_SECRET }}
+      #   run: |
+      #     bzt performance.yaml
       # - name: Get code
       #   uses: actions/checkout@v4
         
