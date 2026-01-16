@@ -17,7 +17,7 @@
         }
       ],
       "environment": [
-        { "name": "APPCONFIG_APPLICATION", "value": "Test-ap" },
+        { "name": "APPCONFIG_APPLICATION", "value": "Test-app" },
         { "name": "APPCONFIG_ENVIRONMENT", "value": "Dev" },
         { "name": "APPCONFIG_CONFIGURATION", "value": "runtime-config" },
         { "name": "APPCONFIG_HOST", "value": "localhost" },
